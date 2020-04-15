@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Calculadora Selectividad - @yoteayudoconlasele</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rompiendo el aislamiento">
+
+    <!-- Loading script -->
+    <style>
+        @keyframes hideLoader {
+            0% {
+                width: 100%;
+                height: 100%;
+            }
+
+            100% {
+                width: 0;
+                height: 0;
+            }
+        }
+
+        body>div.loader {
+            position: fixed;
+            background: white;
+            width: 100%;
+            height: 100%;
+            z-index: 1071;
+            opacity: 0;
+            transition: opacity .5s ease;
+            overflow: hidden;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body:not(.loaded)>div.loader {
+            opacity: 1;
+        }
+
+        body:not(.loaded) {
+            overflow: hidden;
+        }
+
+        body.loaded>div.loader {
+            animation: hideLoader .5s linear .5s forwards;
+        }
+
+        .loading-animation {
+            width: 40px;
+            height: 40px;
+            margin: 100px auto;
+            background-color: #2568ef;
+            border-radius: 100%;
+            animation: pulse 1s infinite ease-in-out
+        }
+
+        @keyframes pulse {
+            0% {
+                -webkit-transform: scale(0);
+                transform: scale(0)
+            }
+
+            100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                opacity: 0
+            }
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.addEventListener("load", function () { document.querySelector('body').classList.add('loaded'); });
+    </script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css"
+        href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/excite-bike/jquery-ui.css">
+    <link href="./static/css/styles.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,600,700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./static/img/branding/favicon.png" />
+</head>
+
+<body>
+    <div class="loader">
+        <div class="loading-animation"></div>
+    </div>
+
+    <section class="bg-blue p-0 o-hidden">
+        <div class="container min-vh-100 d-flex flex-column justify-content-between py-4 py-md-5">
+            <!-- Header -->
+            <a href="/" class="fade-page text-center">
+                (poner logo)
+                <!--<img src="./static/img/branding/logo.png" alt="Hospitalit-e" width="300px">-->
+            </a>
+
+            <!-- Content -->
+            <div class="my-5">
+
+                <div class="row justify-content-center" id="loading">
+
+                    <div class="col-xl-8 col-lg-9 col-md-10">
+                        <div class="d-flex mb-4 align-items-center justify-content-end text-white">
+                            <p class="mb-0 mr-3" style="font-size:20px">Nota EvAU:</p>
+                            <div class="rounded bg-white">
+                                <div class="h1 mb-0 ml-2 mr-2" style="color:#000" id="nota-evau">--.---</div>
+                            </div>
+                        </div>
+                        <div class="card card-body bg-white justify-content-around">
+                            <div class="row ">
+                                <div class="col-md-6">
+                                    <div class="card bg-light mb-3 mb-md-4">
+                                        <div class="card-body">
+                                            <div class="form-group mb-0 pb-0">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><strong>Media
+                                                                Bachillerato</strong></span>
+                                                    </div>
+                                                    <input class="form-control text-right" placeholder="Nota" type="number" id="media-bach">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3 mb-md-4">
+                                        <div class="card-body">
+                                            <h4>Troncales</h4>
+                                            <p>Rellena tu nota de las troncales</p>
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Lengua</span>
+                                                    </div>
+                                                    <input class="form-control text-right" placeholder="Nota" type="number" id="troncal-1">
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Lengua extranjera</span>
+                                                    </div>
+                                                    <input class="form-control text-right" placeholder="Nota" type="number" id="troncal-2">
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Historia</span>
+                                                    </div>
+                                                    <input class="form-control text-right" placeholder="Nota" type="number" id="troncal-3">
+                                                </div>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Troncal de opción</span>
+                                                    </div>
+                                                    <input class="form-control text-right" placeholder="Nota" type="number" id="troncal-4">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card mb-3 mb-md-4">
+                                        <div class="card-body">
+                                            <h4>Específicas</h4>
+                                            <p>Rellena la nota en tantas asignaturas como te presentes</p>
+                                            <div class="form-group mb-0">
+                                                <div class="input-group">
+                                                    <input class="form-control" placeholder="Nota" type="number" id="especifica-1">
+                                                    <div class="input-group-append">
+                                                        <nav>
+                                                            <ul class="pagination">
+                                                                <li class="page-item active" id="especifica-1-p1"><button type="button" class="page-link"><strong>0.1</strong></button></li>
+                                                                <li class="page-item" id="especifica-1-p2"><button type="button" class="page-link"><strong>0.15</strong></button></li>
+                                                                <li class="page-item" id="especifica-1-p3"><button type="button" class="page-link"><strong>0.2</strong></button></li>
+                                                            </ul>
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <input class="form-control" placeholder="Nota" type="number" id="especifica-2">
+                                                    <div class="input-group-append">
+                                                        <nav>
+                                                            <ul class="pagination">
+                                                                <li class="page-item active" id="especifica-2-p1"><button type="button" class="page-link"><strong>0.1</strong></button></li>
+                                                                <li class="page-item" id="especifica-2-p2"><button type="button" class="page-link"><strong>0.15</strong></button></li>
+                                                                <li class="page-item" id="especifica-2-p3"><button type="button" class="page-link"><strong>0.2</strong></button></li>
+                                                            </ul>
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <input class="form-control" placeholder="Nota" type="number" id="especifica-3">
+                                                    <div class="input-group-append">
+                                                        <nav>
+                                                            <ul class="pagination">
+                                                                <li class="page-item active" id="especifica-3-p1"><button type="button" class="page-link"><strong>0.1</strong></button></li>
+                                                                <li class="page-item" id="especifica-3-p2"><button type="button" class="page-link"><strong>0.15</strong></button></li>
+                                                                <li class="page-item" id="especifica-3-p3"><button type="button" class="page-link"><strong>0.2</strong></button></li>
+                                                            </ul>
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group">
+                                                    <input class="form-control" placeholder="Nota" type="number" id="especifica-4">
+                                                    <div class="input-group-append">
+                                                        <nav>
+                                                            <ul class="pagination">
+                                                                <li class="page-item active" id="especifica-4-p1"><button type="button" class="page-link"><strong>0.1</strong></button></li>
+                                                                <li class="page-item" id="especifica-4-p2"><button type="button" class="page-link"><strong>0.15</strong></button></li>
+                                                                <li class="page-item" id="especifica-4-p3"><button type="button" class="page-link"><strong>0.2</strong></button></li>
+                                                            </ul>
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#" role="button" class="btn btn-block btn-lg btn-primary" id="calcular">
+                                        <nobr>Calcular &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></nobr>
+                                    </a>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center pt-4">
+                    <a href="https://mianfg.me"><img style="width: 300px;" src="https://mianfg.me/resources/2020/02/withlove.svg"></a>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-muted text-white text-center">
+                <a href="https://github.com/mianfg/calculadora-sele" target="_blank" role="button" class="selectable btn btn-sm btn-outline-light fade-page" role="button"
+                    style="margin-left:10px;margin-right:10px;margin-top:10px;margin-bottom:10px;"><i
+                        class="fa fa-github"></i>&nbsp;&nbsp;&nbsp;Ver código en GitHub</a>
+            </div>
+        </div>
+
+        <!--<div class="blob blob-6 w-50 h-50 bg-white opacity-30 top right"></div>
+        <div class="blob blob-4 w-25 h-25 bg-yellow opacity-100 bottom left"></div>-->
+    </section>
+
+    <!-- App -->
+    <script src="./static/js/app.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.15.0/js/mdb.min.js"></script>
+    <!-- jQuery UI -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.js"></script>
+    <!-- FontAwesome (from CDN) -->
+    <script src="https://kit.fontawesome.com/e560e492be.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
