@@ -7,6 +7,10 @@
  * Date: 2020-04-16
  */
 
+$(document).ready(function () {
+    showHelper(false);
+});
+
 /**
  * Parse from number input
  * @param {String} input input as string
@@ -32,11 +36,14 @@ function parse(input) {
  *          - add is-invalid class to DOM of input
  */
 function parseTroncal(dom_id) {
+    console.log("parsing troncal ",dom_id)
     val = parse(document.getElementById(dom_id).value);
-    if (val < 0)
-        $(dom_id).addClass("is-invalid");
-    else
-        $(dom_id).removeClass("is-invalid");
+    console.log(dom_id, val)
+    if (val < 0) {
+        console.log("entered with "+dom_id)
+        $("#"+dom_id).addClass("is-invalid");
+    } else
+        $("#"+dom_id).removeClass("is-invalid");
 
     return val;
 }
@@ -52,9 +59,9 @@ function parseTroncal(dom_id) {
 function parseEspecifica(dom_id) {
     val = parse(document.getElementById(dom_id).value);
     if (val == -1)
-        $(dom_id).addClass("is-invalid");
+        $("#"+dom_id).addClass("is-invalid");
     else
-        $(dom_id).removeClass("is-invalid");
+        $("#"+dom_id).removeClass("is-invalid");
 
     return val;
 }
@@ -62,25 +69,82 @@ function parseEspecifica(dom_id) {
 /**
  * Return sum of especificas
  * @param {Array[Float]} especificas all pondered scores
- * @return {Float} sum of two biggest values of especificas
- * @note some cases:
- *      - if especificas.length == 0
- *          - returns 0.0
- *      - if especificas.length == 1
- *          - returns the only element
+ * @return {Array[Float]} array of two biggest values of especificas
  */
 function getEspecificas(especificas) {
     especificas.push(0.0);
     especificas.push(0.0);
+    arr = []
     sum = 0.0;
     max = Math.max.apply(null, especificas);
     maxi = especificas.indexOf(max);
-    if (maxi >= 0) { sum += max; especificas[maxi] = -Infinity; }
+    if (maxi >= 0 && max > 0) { arr.push(max); especificas[maxi] = -Infinity; }
     max = Math.max.apply(null, especificas);
     maxi = especificas.indexOf(max);
-    if (maxi >= 0 ) { sum += max; }
+    if (maxi >= 0 && max > 0) { arr.push(max); }
 
-    return sum;
+    return arr;
+}
+
+/**
+ * Set data of helper dialogue
+ * @param {Array[Array[Float]]} arr 
+ */
+function setHelper(arr) {
+    document.getElementById("helper-3").innerHTML = '<strong>En tu caso:</strong><br>';
+    document.getElementById("helper-4").innerHTML = '<strong>En tu caso:</strong><br>';
+    document.getElementById("helper-5").innerHTML = '<strong>En tu caso:</strong><br>';
+    document.getElementById("helper-6").innerHTML = '<strong>En tu caso:</strong><br>';
+    
+    over_five = []
+    if ( arr.length == 0 )
+        document.getElementById("helper-3").innerHTML += '<span>No te has evaluado de ninguna asignatura específica.</span>'
+    for ( i = 0; i < arr.length; i++ ) {
+        document.getElementById("helper-3").innerHTML += '<span class="badge badge-light">'+arr[i][0].toFixed(2).toString()+'</span>';
+        if ( arr[i][0] >= 5 ) {
+            over_five.push(arr[i])
+        }
+        if ( i < arr.length - 1 )
+            document.getElementById("helper-3").innerHTML += '<span>, </span>';
+    }
+
+    esp = []
+    if ( over_five.length == 0 ) {
+        document.getElementById("helper-4").innerHTML += '<span>No tienes ninguna asignatura en fase específica con puntuación mayor o igual a 5, pero ¡no te preocupes! ¡El resto también cuenta y mucho! :)</span>'
+        document.getElementById("helper-5").innerHTML += '<span>No tienes ninguna asignatura en fase específica con puntuación mayor o igual a 5, pero ¡no te preocupes! ¡El resto también cuenta y mucho! :)</span>'
+        document.getElementById("helper-6").innerHTML += '<span>No tienes ninguna asignatura en fase específica con puntuación mayor o igual a 5, pero ¡no te preocupes! ¡El resto también cuenta y mucho! :)</span>'
+    }
+    for ( i = 0; i < over_five.length; i++ ) {
+        document.getElementById("helper-4").innerHTML += '<span class="badge badge-light">'+over_five[i][0].toFixed(2).toString()+'</span>';
+        document.getElementById("helper-5").innerHTML += '<span>' + over_five[i][0].toFixed(2).toString() + ' × ' + over_five[i][1].toFixed(2).toString() + ' = </span><span class="badge badge-light">'+(over_five[i][0]*over_five[i][1]).toFixed(2).toString()+'</span>' 
+        if ( i < over_five.length - 1 ) {
+            document.getElementById("helper-4").innerHTML += '<span>, </span>';
+            document.getElementById("helper-5").innerHTML += '<span>, </span>';
+        }
+        esp.push(over_five[i][0]*over_five[i][1]);
+    }
+
+    max = getEspecificas(esp);
+    if ( max.length > 0 )
+        document.getElementById("helper-6").innerHTML += '<span class="badge badge-danger">'+max.reduce((a,b)=>a+b,0).toFixed(3).toString()+'</span><span> = </span>';
+    for ( i = 0; i < max.length; i++ ) {
+        document.getElementById("helper-6").innerHTML += '<span class="badge badge-light">'+max[i].toFixed(2).toString()+'</span>';
+        if ( i < max.length - 1 )
+            document.getElementById("helper-6").innerHTML += '<span> + </span>';
+    }
+}
+
+/**
+ * Hide or show helper of calculation dialogue
+ * @param {Boolean} b true is show, false is hide
+ */
+function showHelper(b) {
+    for ( i = 2; i <= 6; i++ ) {
+        if (b) $("#helper-"+i.toString()).show();
+        else $("#helper-"+i.toString()).hide();
+    }
+    if (b) document.getElementById("helper-1").innerHTML = '<strong>En tu caso:</strong><br><span class="badge badge-success" id="helper-n">--.---</span><span> = 0.6 × </span><span class="badge badge-info" id="helper-mb">.</span><span> + 0.4 × </span><span class="badge badge-warning" id="helper-t0">.</span><span> + </span><span class="badge badge-danger" id="helper-e">Nota de la Fase Específica</span>';
+    else document.getElementById("helper-1").innerHTML = "Presiona con tus notas en el botón calcular y vuelve aquí para una explicación detallada de cómo la hemos obtenido con tus calificaciones.";
 }
 
 /**
@@ -89,30 +153,51 @@ function getEspecificas(especificas) {
  * Calculates and modifies score if all input is OK
  */
 document.getElementById("calcular").onclick = function () {
+    showHelper(true);
     calculate = true;
     
     media_bach = parseTroncal("media-bach");
     if (media_bach < 0) calculate = false;
+
+    document.getElementById("helper-mb").innerHTML = media_bach.toFixed(2);
     
     troncales = 0;
     for ( i = 1; i <= 4; i++ ) {
         dom_id = "troncal-" + i.toString();
+        if (i == 4) dom_id = "especifica-4";
         value = parseTroncal(dom_id);
+        document.getElementById("helper-"+dom_id).innerHTML = value.toFixed(2);
         if (value < 0) calculate = false;
         troncales += value/4.0;
     }
 
+    document.getElementById("helper-t").innerHTML = troncales.toFixed(3);
+
     especificas = []
+    especificas_helper = []
     for ( i = 1; i <= 4; i++ ) {
         dom_id = "especifica-" + i.toString();
         value = parseEspecifica(dom_id);
+        if (i == 4) value = parseTroncal(dom_id);
         if (value == -1) calculate = false;
-        especificas.push(value*ponder[i-1]);
+        else if (value > 0) especificas_helper.push([value, ponder[i-1]])
+        if (value >= 5) especificas.push(value*ponder[i-1]);
     }
+
+    setHelper(especificas_helper);
+    nota_especifica = getEspecificas(especificas).reduce((a,b)=>a+b,0);
     
     if (calculate) {
-        nota = media_bach*0.6 + troncales*0.4 + getEspecificas(especificas);
+        showHelper(true);
+        nota = media_bach*0.6 + troncales*0.4 + nota_especifica;
         document.getElementById("nota-evau").innerHTML = nota.toFixed(3);
+        document.getElementById("helper-n").innerHTML = nota.toFixed(3);
+        document.getElementById("helper-mb").innerHTML = media_bach.toFixed(2);
+        document.getElementById("helper-e").innerHTML = nota_especifica.toFixed(3);
+        document.getElementById("helper-t0").innerHTML = troncales.toFixed(3);
+    } else {
+        document.getElementById("nota-evau").innerHTML = "--.---";
+        showHelper(false);
     }
 }
 

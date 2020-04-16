@@ -68,7 +68,7 @@
                                     <div class="card mb-3 mb-md-4">
                                         <div class="card-body">
                                             <h4>Troncales</h4>
-                                            <p>Rellena tu nota de las troncales</p>
+                                            <p>Rellena tu nota para cada una de las asignaturas troncales</p>
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
@@ -91,12 +91,29 @@
                                                     <input class="form-control text-right" placeholder="Nota"
                                                         type="number" id="troncal-3">
                                                 </div>
+                                                <h5 class="mb-1 pt-1">Troncal de opción</h5>
+                                                <p>Inserta tu nota y la ponderación de la asignatura troncal de opción para la titulación que quieras</p>
                                                 <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">Troncal de opción</span>
+                                                    <input class="form-control" placeholder="Nota" type="number"
+                                                        id="especifica-4">
+                                                    <div class="input-group-append">
+                                                        <nav>
+                                                            <ul class="pagination mb-0">
+                                                                <li class="page-item active" id="especifica-4-p1">
+                                                                    <button type="button"
+                                                                        class="page-link"><strong>0.1</strong></button>
+                                                                </li>
+                                                                <li class="page-item" id="especifica-4-p2"><button
+                                                                        type="button"
+                                                                        class="page-link"><strong>0.15</strong></button>
+                                                                </li>
+                                                                <li class="page-item" id="especifica-4-p3"><button
+                                                                        type="button"
+                                                                        class="page-link"><strong>0.2</strong></button>
+                                                                </li>
+                                                            </ul>
+                                                        </nav>
                                                     </div>
-                                                    <input class="form-control text-right" placeholder="Nota"
-                                                        type="number" id="troncal-4">
                                                 </div>
                                             </div>
                                         </div>
@@ -106,7 +123,7 @@
                                     <div class="card mb-3 mb-md-4">
                                         <div class="card-body">
                                             <h4>Específicas</h4>
-                                            <p>Rellena la nota en tantas asignaturas como te presentes</p>
+                                            <p>Rellena la nota en tantas asignaturas como te presentes, e indica la ponderación de cada una de ellas para la titulación que quieras</p>
                                             <div class="form-group mb-0">
                                                 <div class="input-group">
                                                     <input class="form-control" placeholder="Nota" type="number"
@@ -157,7 +174,7 @@
                                                         id="especifica-3">
                                                     <div class="input-group-append">
                                                         <nav>
-                                                            <ul class="pagination">
+                                                            <ul class="pagination mb-0">
                                                                 <li class="page-item active" id="especifica-3-p1">
                                                                     <button type="button"
                                                                         class="page-link"><strong>0.1</strong></button>
@@ -174,31 +191,18 @@
                                                         </nav>
                                                     </div>
                                                 </div>
-                                                <div class="input-group">
-                                                    <input class="form-control" placeholder="Nota" type="number"
-                                                        id="especifica-4">
-                                                    <div class="input-group-append">
-                                                        <nav>
-                                                            <ul class="pagination">
-                                                                <li class="page-item active" id="especifica-4-p1">
-                                                                    <button type="button"
-                                                                        class="page-link"><strong>0.1</strong></button>
-                                                                </li>
-                                                                <li class="page-item" id="especifica-4-p2"><button
-                                                                        type="button"
-                                                                        class="page-link"><strong>0.15</strong></button>
-                                                                </li>
-                                                                <li class="page-item" id="especifica-4-p3"><button
-                                                                        type="button"
-                                                                        class="page-link"><strong>0.2</strong></button>
-                                                                </li>
-                                                            </ul>
-                                                        </nav>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <a href="#" data-toggle="modal" data-target="#info-nota">
+                                    <div class="card mb-3 mb-md-4 bg-light">
+                                        <div class="card-body">
+                                            <p class="mb-1"><strong>HAZLO POR TI MISMO</strong></p>
+                                            <h4 class="mb-0">Cómo calcular tu nota de la EvAU <i class="fa fa-arrow-right"></i></h4>                                            
+                                        </div>
+                                    </div>
+                                    </a>
                                     <a href="#" role="button" class="btn btn-block btn-lg btn-primary" id="calcular">
                                         <nobr>Calcular &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></nobr>
                                     </a>
@@ -224,14 +228,73 @@
                     style="margin-left:10px;margin-right:10px;margin-top:10px;margin-bottom:10px;"><i
                         class="fa fa-github"></i>&nbsp;&nbsp;&nbsp;Ver código en GitHub</a>
             </div>
+
+
         </div>
 
         <!--<div class="blob blob-6 w-50 h-50 bg-white opacity-30 top right"></div>
         <div class="blob blob-4 w-25 h-25 bg-yellow opacity-100 bottom left"></div>-->
     </section>
 
-    <!-- App -->
-    <script src="./static/js/app.js"></script>
+              <!-- Modal -->
+              <div class="modal fade" id="info-nota" tabindex="-1" role="dialog"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-calculator"></i>&nbsp;&nbsp;&nbsp;Cómo calcular tu nota de la EvAU</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col">
+                        <p>Para calcular tu nota de la EvAU, tienes que aplicar la siguiente fórmula:</p>
+                        <div class="my-3 text-center">
+                            <span>0.6 × </span><span class="badge badge-info">Media de Bachillerato</span><span> + 0.4 × </span><span class="badge badge-warning">Media de Troncales</span><span> + <span class="badge badge-danger">Nota de la Fase Específica</span></span>
+                        </div>
+                        <blockquote class="blockquote" id="helper-1">
+                            <strong>En tu caso:</strong><br><span class="badge badge-success" id="helper-n">--.---</span><span> = 0.6 × </span><span class="badge badge-info" id="helper-mb">.</span><span> + 0.4 × </span><span class="badge badge-warning" id="helper-t0">.</span><span> + </span><span class="badge badge-danger" id="helper-e">Nota de la Fase Específica</span>
+                        </blockquote>
+                        <p>A continuación te explicamos cada uno de los elementos:</p>
+                        <h5 class="pt-3">Media de Bachillerato</h5>
+                        <p>Tu nota media de Bachillerato, de 0 a 10, se calcula realizando la media de tus calificaciones globales para 1º y 2º de Bachillerato.</p>
+                        <h5 class="pt-3">Media de Troncales</h5 class="pt-3">
+                        <p>En la EvAU realizas cuatro exámenes de asignaturas troncales, aquí nos referimos a la media de estas cuatro calificaciones.</p>
+                        <blockquote class="blockquote" id="helper-2">
+                            <strong>En tu caso:</strong><br><span class="badge badge-warning" id="helper-t">--.---</span><span> = ( </span><span class="badge badge-light" id="helper-troncal-1">.</span><span> + </span><span class="badge badge-light" id="helper-troncal-2">.</span><span> + </span><span class="badge badge-light" id="helper-troncal-3">.</span><span> + </span><span class="badge badge-light" id="helper-especifica-4">.</span><span> ) / 4</span>
+                        </blockquote>
+                        <h5 class="pt-3">Nota de la Fase Específica</h5 class="pt-3">
+                        <p>Para calcular esto, puedes seguir el siguiente proceso:</p>
+                        <ol>
+                            <li>Anota tus notas de las asignaturas de la fase específica y de tu asignatura troncal de opción, que cuenta como cualquier otra específica.</li>
+                            <blockquote class="blockquote" id="helper-3">
+                                <strong>En tu caso:</strong><br><span class="badge badge-light" id="helper-especifica-1">.</span><span>, </span><span class="badge badge-light" id="helper-especifica-2">.</span><span>, </span><span class="badge badge-light" id="helper-especifica-3">.</span><span>, </span><span class="badge badge-light" id="helper-especifica-4">.</span>
+                            </blockquote>
+                            <li>Descarta aquellas que tengan una calificación <strong>inferior a 5</strong>.</li>
+                            <blockquote class="blockquote" id="helper-4">
+                                <strong>En tu caso:</strong><br><span class="badge badge-light" id="helper-especifica-1">.</span><span>, </span><span class="badge badge-light" id="helper-especifica-2">.</span><span>, </span><span class="badge badge-light" id="helper-especifica-3">.</span><span>, </span><span class="badge badge-light" id="helper-especifica-4">.</span>
+                            </blockquote>
+                            <li>Multiplica las notas de cada asignatura por la <strong>ponderación</strong> (0.1, 0.15 o 0.2) de las asignaturas de acuerdo a la titulación en la que quieras entrar.</li>
+                            <blockquote class="blockquote" id="helper-5">
+                                <strong>En tu caso:</strong><br><span class="badge badge-light" id="helper-especifica-1">.</span><span>, </span><span class="badge badge-light" id="helper-especifica-2">.</span><span>, </span><span class="badge badge-light" id="helper-especifica-3">.</span><span>, </span><span class="badge badge-light" id="helper-especifica-4">.</span>
+                            </blockquote>
+                            <li>Una vez que hayas aplicado las ponderaciones, realiza la suma de <strong>tus dos calificaciones más altas</strong>. Esta es tu nota de la fase específica.</li>
+                            <blockquote class="blockquote" id="helper-6">
+                                <strong>En tu caso:</strong><br><span class="badge badge-light" id="helper-especifica-1">.</span><span>, </span><span class="badge badge-light" id="helper-especifica-2">.</span><span>, </span><span class="badge badge-light" id="helper-especifica-3">.</span><span>, </span><span class="badge badge-light" id="helper-especifica-4">.</span>
+                            </blockquote>
+                        </ol>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+            
+              </div>
+            </div>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -247,6 +310,8 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.js"></script>
     <!-- FontAwesome (from CDN) -->
     <script src="https://kit.fontawesome.com/e560e492be.js" crossorigin="anonymous"></script>
+    <!-- App -->
+    <script src="./static/js/app.js"></script>
 </body>
 
 </html>

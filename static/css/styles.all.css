@@ -427,8 +427,8 @@ mark,
   text-transform: uppercase; }
 
 .blockquote {
-  margin-bottom: 1rem;
-  font-size: 1.25rem; }
+  /*margin-bottom: 1rem;
+  font-size: 1.25rem;*/ }
 
 .blockquote-footer {
   display: block;
@@ -8193,15 +8193,15 @@ mark {
 
 @media (max-width: 1199.98px) {
   .blockquote {
-    font-size: 1.25rem !important; } }
+    /*font-size: 1.25rem !important;*/ } }
 
 address p {
   margin-bottom: 0; }
 
 @media (min-width: 768px) {
   .blockquote {
-    font-size: 1.5rem;
-    padding-left: 3rem; } }
+    /*font-size: 1.5rem;
+    padding-left: 3rem;*/ } }
 
 .text-white .display-1,
 .text-white .display-2,
