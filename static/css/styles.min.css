@@ -20,6 +20,10 @@ input[type=number] {
   -moz-appearance: textfield;
 }   
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -3619,7 +3623,7 @@ input[type="button"].btn-block {
   display: block;
   padding: 0.75rem 1rem;
   margin-left: -1px;
-  line-height: 1.25;
+  line-height: 1.4;
   color: #03989e;
   background-color: #fff;
   border: 1px solid #EAEDF2; }
@@ -3632,7 +3636,7 @@ input[type="button"].btn-block {
   .page-link:focus {
     z-index: 2;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(255, 193, 0, 0.25); }
+    box-shadow: 0 0 0 0.2rem rgba(3, 152, 158, 0.25); }
 
 .page-item:first-child .page-link {
   margin-left: 0;

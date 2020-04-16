@@ -34,18 +34,26 @@
                     </a>
                 </div>
             </div>
-
             <!-- Content -->
             <div class="my-5">
 
                 <div class="row justify-content-center">
 
                     <div class="col-xl-8 col-lg-9 col-md-10">
-                        <div class="d-flex mb-4 align-items-center justify-content-end text-white mr-3 pr-3">
-                            <p class="mb-0 mr-3" style="font-size:20px">Nota EvAU:</p>
-                            <div class="rounded bg-white">
-                                <div class="h1 mb-0 ml-2 mr-2" style="color:#c4962e; font-size:50px" id="nota-evau">
-                                    --.---</div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-flex mb-4 align-items-center justify-content-beginning text-white ml-3 pl-3">
+                                    <a href="#" id="comprobar" data-toggle="modal" data-target="#info-nota" role="button" class="disabled selectable btn btn-sm btn-primary fade-page waves-effect mt-2"><i class="fa fa-search mr-2" aria-hidden="true"></i>Comprobar nota</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex mb-4 align-items-center justify-content-end text-white mr-3 pr-3">
+                                    <p class="mb-0 mr-3" style="font-size:20px">Nota EvAU:</p>
+                                    <div class="rounded bg-white">
+                                        <div class="h1 mb-0 ml-2 mr-2" style="color:#c4962e; font-size:50px" id="nota-evau">
+                                            --.---</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card card-body bg-white justify-content-around">
@@ -79,6 +87,13 @@
                                                 </div>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
+                                                        <span class="input-group-text">Lengua cooficial*</span>
+                                                    </div>
+                                                    <input class="form-control text-right" placeholder="Nota"
+                                                        type="number" id="troncal-c">
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
                                                         <span class="input-group-text">Lengua extranjera</span>
                                                     </div>
                                                     <input class="form-control text-right" placeholder="Nota"
@@ -91,6 +106,7 @@
                                                     <input class="form-control text-right" placeholder="Nota"
                                                         type="number" id="troncal-3">
                                                 </div>
+                                                <p class="text-small">*Dejar en blanco en caso de no tener</p>
                                                 <h5 class="mb-1 pt-1">Troncal de opción</h5>
                                                 <p>Inserta tu nota y la ponderación de la asignatura troncal de opción
                                                     para la titulación que quieras</p>
@@ -198,17 +214,17 @@
                                     </div>
 
                                     <a href="#" data-toggle="modal" data-target="#info-nota">
-                                        <div class="card mb-3 mb-md-4 bg-light">
-                                            <div class="card-body">
-                                                <p class="mb-1"><strong>HAZLO POR TI MISMO</strong></p>
-                                                <h4 class="mb-0">Cómo calcular tu nota de la EvAU <i
-                                                        class="fa fa-arrow-right"></i></h4>
+                                        <div class="card mb-3 mb-md-4 bg-light" id="calculate-call-card-back">
+                                            <div class="card-body" id="calculate-call-p">
+                                                <p class="mb-1"><strong id="calculate-call">HAZLO POR TI MISMO</strong></p>
+                                                <h4 class="mb-0" id="calculate-call-h">Cómo calcular tu nota de la EvAU<i
+                                                        class="fa fa-arrow-right ml-2"></i></h4>
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="#" role="button" class="btn btn-block btn-lg btn-primary" id="calcular">
-                                        <nobr>Calcular &nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-right"></i></nobr>
-                                    </a>
+                                    <button role="button" class="btn btn-block btn-lg btn-primary" id="calcular">
+                                        <nobr>Calcular<i class="fa fa-arrow-right ml-3"></i></nobr>
+                                    </button>
                                 </div>
 
                             </div>
@@ -229,7 +245,7 @@
                 <a href="https://github.com/mianfg/calculadora-sele" target="_blank" role="button"
                     class="selectable btn btn-sm btn-outline-light fade-page" role="button"
                     style="margin-left:10px;margin-right:10px;margin-top:10px;margin-bottom:10px;"><i
-                        class="fa fa-github"></i>&nbsp;&nbsp;&nbsp;Ver código en GitHub</a>
+                        class="fa fa-github mr-2"></i>Ver código en GitHub</a>
             </div>
 
 
@@ -245,7 +261,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle"><i
-                            class="fa fa-calculator"></i>&nbsp;&nbsp;&nbsp;Cómo calcular tu nota de la EvAU</h5>
+                            class="fa fa-calculator mr-2"></i>Cómo calcular tu nota de la EvAU</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -260,7 +276,7 @@
                                     <span class="badge badge-danger">Nota de la Fase Específica</span></span>
                             </div>
                             <blockquote class="blockquote" id="helper-1">
-                                <strong>En tu caso:</strong><br><span class="badge badge-success"
+                                <strong><i class="fa fa-search mr-2"></i>Comprobar nota:</strong> te explicaremos cómo hemos calculado tu nota, paso a paso.<br><span class="badge badge-success"
                                     id="helper-n">--.---</span><span> = 0.6 × </span><span class="badge badge-info"
                                     id="helper-mb">.</span><span> + 0.4 × </span><span class="badge badge-warning"
                                     id="helper-t0">.</span><span> + </span><span class="badge badge-danger"
@@ -271,50 +287,51 @@
                             <p>Tu nota media de Bachillerato, de 0 a 10, se calcula realizando la media de tus
                                 calificaciones globales para 1º y 2º de Bachillerato.</p>
                             <h5 class="pt-3">Media de Troncales</h5 class="pt-3">
-                            <p>En la EvAU realizas cuatro exámenes de asignaturas troncales, aquí nos referimos a la
-                                media de estas cuatro calificaciones.</p>
+                            <p>En la EvAU realizas cuatro exámenes de asignaturas troncales, cinco en caso de hacer un examen de la lengua cooficial de tu Comunidad Autónoma, aquí nos referimos a la
+                                media de estas calificaciones.</p>
                             <blockquote class="blockquote" id="helper-2">
-                                <strong>En tu caso:</strong><br><span class="badge badge-warning"
+                                <strong><i class="fa fa-search mr-2"></i>En tu caso:</strong><br><span class="badge badge-warning"
                                     id="helper-t">--.---</span><span> = ( </span><span class="badge badge-light"
-                                    id="helper-troncal-1">.</span><span> + </span><span class="badge badge-light"
+                                    id="helper-troncal-1">.</span><span id="sum-troncal-c"> + </span><span class="badge badge-light"
+                                    id="helper-troncal-c">.</span><span> + </span><span class="badge badge-light"
                                     id="helper-troncal-2">.</span><span> + </span><span class="badge badge-light"
                                     id="helper-troncal-3">.</span><span> + </span><span class="badge badge-light"
-                                    id="helper-especifica-4">.</span><span> ) / 4</span>
+                                    id="helper-especifica-4">.</span><span id="coof-n"> ) / 4</span>
                             </blockquote>
                             <h5 class="pt-3">Nota de la Fase Específica</h5 class="pt-3">
                             <p>Para calcular esto, puedes seguir el siguiente proceso:</p>
                             <ol>
-                                <li>Anota tus notas de las asignaturas de la fase específica y de tu asignatura troncal
+                                <li class="mb-1">Anota tus notas de las asignaturas de la fase específica y de tu asignatura troncal
                                     de opción, que cuenta como cualquier otra específica.</li>
                                 <blockquote class="blockquote" id="helper-3">
-                                    <strong>En tu caso:</strong><br><span class="badge badge-light"
+                                    <strong><i class="fa fa-search mr-2"></i>En tu caso:</strong><br><span class="badge badge-light"
                                         id="helper-especifica-1">.</span><span>, </span><span class="badge badge-light"
                                         id="helper-especifica-2">.</span><span>, </span><span class="badge badge-light"
                                         id="helper-especifica-3">.</span><span>, </span><span class="badge badge-light"
                                         id="helper-especifica-4">.</span>
                                 </blockquote>
-                                <li>Descarta aquellas que tengan una calificación <strong>inferior a 5</strong>.</li>
+                                <li class="mb-1">Descarta aquellas que tengan una calificación <strong>inferior a 5</strong>.</li>
                                 <blockquote class="blockquote" id="helper-4">
-                                    <strong>En tu caso:</strong><br><span class="badge badge-light"
+                                    <strong><i class="fa fa-search mr-2"></i>En tu caso:</strong><br><span class="badge badge-light"
                                         id="helper-especifica-1">.</span><span>, </span><span class="badge badge-light"
                                         id="helper-especifica-2">.</span><span>, </span><span class="badge badge-light"
                                         id="helper-especifica-3">.</span><span>, </span><span class="badge badge-light"
                                         id="helper-especifica-4">.</span>
                                 </blockquote>
-                                <li>Multiplica las notas de cada asignatura por la <strong>ponderación</strong> (0.1,
+                                <li class="mb-1">Multiplica las notas de cada asignatura por la <strong>ponderación</strong> (0.1,
                                     0.15 o 0.2) de las asignaturas de acuerdo a la titulación en la que quieras entrar.
                                 </li>
                                 <blockquote class="blockquote" id="helper-5">
-                                    <strong>En tu caso:</strong><br><span class="badge badge-light"
+                                    <strong><i class="fa fa-search mr-2"></i>En tu caso:</strong><br><span class="badge badge-light"
                                         id="helper-especifica-1">.</span><span>, </span><span class="badge badge-light"
                                         id="helper-especifica-2">.</span><span>, </span><span class="badge badge-light"
                                         id="helper-especifica-3">.</span><span>, </span><span class="badge badge-light"
                                         id="helper-especifica-4">.</span>
                                 </blockquote>
-                                <li>Una vez que hayas aplicado las ponderaciones, realiza la suma de <strong>tus dos
+                                <li class="mb-1">Una vez que hayas aplicado las ponderaciones, realiza la suma de <strong>tus dos
                                         calificaciones más altas</strong>. Esta es tu nota de la fase específica.</li>
                                 <blockquote class="blockquote" id="helper-6">
-                                    <strong>En tu caso:</strong><br><span class="badge badge-light"
+                                    <strong><i class="fa fa-search mr-2"></i>En tu caso:</strong><br><span class="badge badge-light"
                                         id="helper-especifica-1">.</span><span>, </span><span class="badge badge-light"
                                         id="helper-especifica-2">.</span><span>, </span><span class="badge badge-light"
                                         id="helper-especifica-3">.</span><span>, </span><span class="badge badge-light"

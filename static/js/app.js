@@ -35,7 +35,7 @@ function parse(input) {
  *      - if input is empty or input < 0 || input > 10:
  *          - add is-invalid class to DOM of input
  */
-function parseTroncal(dom_id) {
+function parseRequire(dom_id) {
     val = parse(document.getElementById(dom_id).value);
     if (val < 0)
         $("#"+dom_id).addClass("is-invalid");
@@ -53,7 +53,7 @@ function parseTroncal(dom_id) {
  *      - if input < 0 || input > 10:
  *          - add is-invalid class to DOM of input
  */
-function parseEspecifica(dom_id) {
+function parseOptional(dom_id) {
     val = parse(document.getElementById(dom_id).value);
     if (val == -1)
         $("#"+dom_id).addClass("is-invalid");
@@ -88,10 +88,10 @@ function getEspecificas(especificas) {
  * @param {Array[Array[Float]]} arr 
  */
 function setHelper(arr) {
-    document.getElementById("helper-3").innerHTML = '<strong>En tu caso:</strong><br>';
-    document.getElementById("helper-4").innerHTML = '<strong>En tu caso:</strong><br>';
-    document.getElementById("helper-5").innerHTML = '<strong>En tu caso:</strong><br>';
-    document.getElementById("helper-6").innerHTML = '<strong>En tu caso:</strong><br>';
+    document.getElementById("helper-3").innerHTML = '<p class="mb-1"><strong><i class="fa fa-search mr-2"></i>En tu caso:</strong></p>';
+    document.getElementById("helper-4").innerHTML = '<p class="mb-1"><strong><i class="fa fa-search mr-2"></i>En tu caso:</strong></p>';
+    document.getElementById("helper-5").innerHTML = '<p class="mb-1"><strong><i class="fa fa-search mr-2"></i>En tu caso:</strong></p>';
+    document.getElementById("helper-6").innerHTML = '<p class="mb-1"><strong><i class="fa fa-search mr-2"></i>En tu caso:</strong></p>';
     
     over_five = []
     if ( arr.length == 0 )
@@ -113,7 +113,7 @@ function setHelper(arr) {
     }
     for ( i = 0; i < over_five.length; i++ ) {
         document.getElementById("helper-4").innerHTML += '<span class="badge badge-light">'+over_five[i][0].toFixed(2).toString()+'</span>';
-        document.getElementById("helper-5").innerHTML += '<span>' + over_five[i][0].toFixed(2).toString() + ' × ' + over_five[i][1].toFixed(2).toString() + ' = </span><span class="badge badge-light">'+(over_five[i][0]*over_five[i][1]).toFixed(2).toString()+'</span>' 
+        document.getElementById("helper-5").innerHTML += '<span>' + over_five[i][0].toFixed(2).toString() + ' × ' + over_five[i][1].toFixed(2).toString() + ' = </span><span class="badge badge-light">'+(over_five[i][0]*over_five[i][1]).toFixed(3).toString()+'</span>' 
         if ( i < over_five.length - 1 ) {
             document.getElementById("helper-4").innerHTML += '<span>, </span>';
             document.getElementById("helper-5").innerHTML += '<span>, </span>';
@@ -125,7 +125,7 @@ function setHelper(arr) {
     if ( max.length > 0 )
         document.getElementById("helper-6").innerHTML += '<span class="badge badge-danger">'+max.reduce((a,b)=>a+b,0).toFixed(3).toString()+'</span><span> = </span>';
     for ( i = 0; i < max.length; i++ ) {
-        document.getElementById("helper-6").innerHTML += '<span class="badge badge-light">'+max[i].toFixed(2).toString()+'</span>';
+        document.getElementById("helper-6").innerHTML += '<span class="badge badge-light">'+max[i].toFixed(3).toString()+'</span>';
         if ( i < max.length - 1 )
             document.getElementById("helper-6").innerHTML += '<span> + </span>';
     }
@@ -140,8 +140,18 @@ function showHelper(b) {
         if (b) $("#helper-"+i.toString()).show();
         else $("#helper-"+i.toString()).hide();
     }
-    if (b) document.getElementById("helper-1").innerHTML = '<strong>En tu caso:</strong><br><span class="badge badge-success" id="helper-n">--.---</span><span> = 0.6 × </span><span class="badge badge-info" id="helper-mb">.</span><span> + 0.4 × </span><span class="badge badge-warning" id="helper-t0">.</span><span> + </span><span class="badge badge-danger" id="helper-e">Nota de la Fase Específica</span>';
-    else document.getElementById("helper-1").innerHTML = "Presiona con tus notas en el botón calcular y vuelve aquí para una explicación detallada de cómo la hemos obtenido con tus calificaciones.";
+    if (b) document.getElementById("helper-1").innerHTML = '<p class="mb-1"><strong><i class="fa fa-search mr-2"></i>Comprobar nota:</strong> te explicaremos cómo hemos calculado tu nota, paso a paso.<br><span class="badge badge-success" id="helper-n">--.---</span><span> = 0.6 × </span><span class="badge badge-info" id="helper-mb">.</span><span> + 0.4 × </span><span class="badge badge-warning" id="helper-t0">.</span><span> + </span><span class="badge badge-danger" id="helper-e">Nota de la Fase Específica</span></p>';
+    else document.getElementById("helper-1").innerHTML = '<strong><i class="fa fa-search mr-2"></i>Comprobar nota:</strong> Introduce tus notas y luego pulsa en el botón <strong>Calcular</strong>. Vuelve aquí para una explicación detallada de cómo la hemos obtenido con tus calificaciones.';
+}
+
+function calculateCall(b) {
+    if (b) {
+        document.getElementById("calculate-call").innerHTML = "COMPRUEBA TU NOTA";
+        $("#comprobar").removeClass("disabled")
+    } else {
+        document.getElementById("calculate-call").innerHTML = "HAZLO POR TI MISMO";
+        $("#comprobar").addClass("disabled")
+    }
 }
 
 /**
@@ -152,20 +162,37 @@ function showHelper(b) {
 document.getElementById("calcular").onclick = function () {
     showHelper(true);
     calculate = true;
+    has_coof = false;
     
-    media_bach = parseTroncal("media-bach");
+    media_bach = parseRequire("media-bach");
     if (media_bach < 0) calculate = false;
 
     document.getElementById("helper-mb").innerHTML = media_bach.toFixed(2);
     
-    troncales = 0;
+    troncales = 0; n = 4.0;
+    // comprobar primero si hay lengua cooficial
+    coof = parseOptional("troncal-c");
+    if ( coof != -2 ) {
+        has_coof = true;
+        n = 5.0;
+        troncales += coof/n;
+        document.getElementById("coof-n").innerHTML = " ) / 5";
+        $("#helper-troncal-c").show()
+        $("#sum-troncal-c").show()
+        document.getElementById("helper-troncal-c").innerHTML = coof.toFixed(2).toString();
+    } else {
+        document.getElementById("coof-n").innerHTML = " ) / 4";
+        $("#helper-troncal-c").hide()
+        $("#sum-troncal-c").hide()
+    }
+
     for ( i = 1; i <= 4; i++ ) {
         dom_id = "troncal-" + i.toString();
         if (i == 4) dom_id = "especifica-4";
-        value = parseTroncal(dom_id);
+        value = parseRequire(dom_id);
         document.getElementById("helper-"+dom_id).innerHTML = value.toFixed(2);
         if (value < 0) calculate = false;
-        troncales += value/4.0;
+        troncales += value/n;
     }
 
     document.getElementById("helper-t").innerHTML = troncales.toFixed(3);
@@ -174,8 +201,8 @@ document.getElementById("calcular").onclick = function () {
     especificas_helper = []
     for ( i = 1; i <= 4; i++ ) {
         dom_id = "especifica-" + i.toString();
-        value = parseEspecifica(dom_id);
-        if (i == 4) value = parseTroncal(dom_id);
+        value = parseOptional(dom_id);
+        if (i == 4) value = parseRequire(dom_id);
         if (value == -1) calculate = false;
         else if (value > 0) especificas_helper.push([value, ponder[i-1]])
         if (value >= 5) especificas.push(value*ponder[i-1]);
@@ -192,9 +219,12 @@ document.getElementById("calcular").onclick = function () {
         document.getElementById("helper-mb").innerHTML = media_bach.toFixed(2);
         document.getElementById("helper-e").innerHTML = nota_especifica.toFixed(3);
         document.getElementById("helper-t0").innerHTML = troncales.toFixed(3);
+        calculateCall(true);
+        window.scrollTo(0,0);
     } else {
         document.getElementById("nota-evau").innerHTML = "--.---";
         showHelper(false);
+        calculateCall(false);
     }
 }
 
