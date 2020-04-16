@@ -1,7 +1,4 @@
-var ponder_1 = 0.1;
-var ponder_2 = 0.1;
-var ponder_3 = 0.1;
-var ponder_4 = 0.1;
+var ponder = [0.1, 0.1, 0.1, 0.1]
 
 function parse(input) {
     if (input=="") return -2;
@@ -10,6 +7,26 @@ function parse(input) {
         return -1;
     else
         return value;
+}
+
+function parseTroncal(dom_id) {
+    val = parse(document.getElementById(dom_id).value);
+    if (val < 0)
+        $(dom_id).addClass("is-invalid");
+    else
+        $(dom_id).removeClass("is-invalid");
+
+    return val;
+}
+
+function parseEspecifica(dom_id) {
+    val = parse(document.getElementById(dom_id).value);
+    if (val == -1)
+        $(dom_id).addClass("is-invalid");
+    else
+        $(dom_id).removeClass("is-invalid");
+
+    return val;
 }
 
 function getEspecificas(especificas) {
@@ -29,65 +46,24 @@ function getEspecificas(especificas) {
 document.getElementById("calcular").onclick = function () {
     calculate = true;
     
-    media_bach = parse(document.getElementById("media-bach").value);
-    if (media_bach < 0) {
-        $("#media-bach").addClass("is-invalid");
-        calculate = false;
-    } else
-        $("#media-bach").removeClass("is-invalid");
+    media_bach = parseTroncal("media-bach");
+    if (media_bach < 0) calculate = false;
     
-    troncales = 0
-    if (parse(document.getElementById("troncal-1").value) < 0) {
-        $("#troncal-1").addClass("is-invalid");
-        calculate = false;
-    } else
-        $("#troncal-1").removeClass("is-invalid");
-    troncales += (parse(document.getElementById("troncal-1").value))/4.0;
-    if (parse(document.getElementById("troncal-2").value) < 0) {
-        $("#troncal-2").addClass("is-invalid");
-        calculate = false;
-    } else
-        $("#troncal-2").removeClass("is-invalid");
-    troncales += (parse(document.getElementById("troncal-2").value))/4.0;
-    if (parse(document.getElementById("troncal-3").value) < 0) {
-        $("#troncal-3").addClass("is-invalid");
-        calculate = false;
-    } else
-        $("#troncal-3").removeClass("is-invalid");
-    troncales += (parse(document.getElementById("troncal-3").value))/4.0;
-    if (parse(document.getElementById("troncal-4").value) < 0) {
-        $("#troncal-4").addClass("is-invalid");
-        calculate = false;
-    } else
-        $("#troncal-4").removeClass("is-invalid");
-    troncales += (parse(document.getElementById("troncal-4").value))/4.0;
-
-    if (parse(document.getElementById("especifica-1").value) == -1) {
-        $("#especifica-1").addClass("is-invalid");
-        calculate = false;
-    } else
-        $("#especifica-1").removeClass("is-invalid");
-    if (parse(document.getElementById("especifica-2").value) == -1) {
-        $("#especifica-2").addClass("is-invalid");
-        calculate = false;
-    } else
-        $("#especifica-2").removeClass("is-invalid");
-    if (parse(document.getElementById("especifica-3").value) == -1) {
-        $("#especifica-3").addClass("is-invalid");
-        calculate = false;
-    } else
-        $("#especifica-3").removeClass("is-invalid");
-    if (parse(document.getElementById("especifica-4").value) == -1) {
-        $("#especifica-4").addClass("is-invalid");
-        calculate = false;
-    } else
-        $("#especifica-4").removeClass("is-invalid");
+    troncales = 0;
+    for ( i = 1; i <= 4; i++ ) {
+        dom_id = "troncal-" + i.toString();
+        value = parseTroncal(dom_id);
+        if (value < 0) calculate = false;
+        troncales += value/4.0;
+    }
 
     especificas = []
-    especificas.push(parse(document.getElementById("especifica-1").value)*ponder_1);
-    especificas.push(parse(document.getElementById("especifica-2").value)*ponder_2);
-    especificas.push(parse(document.getElementById("especifica-3").value)*ponder_3);
-    especificas.push(parse(document.getElementById("especifica-4").value)*ponder_4);
+    for ( i = 1; i <= 4; i++ ) {
+        dom_id = "especifica-" + i.toString();
+        value = parseEspecifica(dom_id);
+        if (value == -1) calculate = false;
+        especificas.push(value*ponder[i-1]);
+    }
     
     if (calculate) {
         nota = media_bach*0.6 + troncales*0.4 + getEspecificas(especificas);
@@ -95,86 +71,19 @@ document.getElementById("calcular").onclick = function () {
     }
 }
 
-document.getElementById("especifica-1-p1").onclick = function () {
-    ponder_1 = 0.1;
-    $("#especifica-1-p1").attr("class", "page-item active")
-    $("#especifica-1-p2").attr("class", "page-item")
-    $("#especifica-1-p3").attr("class", "page-item")
-}
-
-document.getElementById("especifica-1-p2").onclick = function () {
-    ponder_1 = 0.15;
-    $("#especifica-1-p1").attr("class", "page-item")
-    $("#especifica-1-p2").attr("class", "page-item active")
-    $("#especifica-1-p3").attr("class", "page-item")
-}
-
-document.getElementById("especifica-1-p3").onclick = function () {
-    ponder_1 = 0.2;
-    $("#especifica-1-p1").attr("class", "page-item")
-    $("#especifica-1-p2").attr("class", "page-item")
-    $("#especifica-1-p3").attr("class", "page-item active")
-}
-
-document.getElementById("especifica-2-p1").onclick = function () {
-    ponder_2 = 0.1;
-    $("#especifica-2-p1").attr("class", "page-item active")
-    $("#especifica-2-p2").attr("class", "page-item")
-    $("#especifica-2-p3").attr("class", "page-item")
-}
-
-document.getElementById("especifica-2-p2").onclick = function () {
-    ponder_2 = 0.15;
-    $("#especifica-2-p1").attr("class", "page-item")
-    $("#especifica-2-p2").attr("class", "page-item active")
-    $("#especifica-2-p3").attr("class", "page-item")
-}
-
-document.getElementById("especifica-2-p3").onclick = function () {
-    ponder_2 = 0.2;
-    $("#especifica-2-p1").attr("class", "page-item")
-    $("#especifica-2-p2").attr("class", "page-item")
-    $("#especifica-2-p3").attr("class", "page-item active")
-}
-
-document.getElementById("especifica-3-p1").onclick = function () {
-    ponder_3 = 0.1;
-    $("#especifica-3-p1").attr("class", "page-item active")
-    $("#especifica-3-p2").attr("class", "page-item")
-    $("#especifica-3-p3").attr("class", "page-item")
-}
-
-document.getElementById("especifica-3-p2").onclick = function () {
-    ponder_3 = 0.15;
-    $("#especifica-3-p1").attr("class", "page-item")
-    $("#especifica-3-p2").attr("class", "page-item active")
-    $("#especifica-3-p3").attr("class", "page-item")
-}
-
-document.getElementById("especifica-3-p3").onclick = function () {
-    ponder_3 = 0.2;
-    $("#especifica-3-p1").attr("class", "page-item")
-    $("#especifica-3-p2").attr("class", "page-item")
-    $("#especifica-3-p3").attr("class", "page-item active")
-}
-
-document.getElementById("especifica-4-p1").onclick = function () {
-    ponder_4 = 0.1;
-    $("#especifica-4-p1").attr("class", "page-item active")
-    $("#especifica-4-p2").attr("class", "page-item")
-    $("#especifica-4-p3").attr("class", "page-item")
-}
-
-document.getElementById("especifica-4-p2").onclick = function () {
-    ponder_4 = 0.15;
-    $("#especifica-4-p1").attr("class", "page-item")
-    $("#especifica-4-p2").attr("class", "page-item active")
-    $("#especifica-4-p3").attr("class", "page-item")
-}
-
-document.getElementById("especifica-4-p3").onclick = function () {
-    ponder_4 = 0.2;
-    $("#especifica-4-p1").attr("class", "page-item")
-    $("#especifica-4-p2").attr("class", "page-item")
-    $("#especifica-4-p3").attr("class", "page-item active")
+for ( var i = 1; i <= 4; i++ ) {
+    let local_i = i;
+    for ( var j = 1; j <= 3; j++ ) {
+        let local_j = j;
+        let dom_id = "especifica-"+i.toString()+"-p"+j.toString();
+        document.getElementById(dom_id).onclick = function() {
+            console.log("you clicked ",dom_id)
+            ponder[local_i-1] = 0.1 + 0.05*(local_j-1);
+            console.log("ponder ",local_i,ponder[local_i-1])
+            $("#"+dom_id).addClass("active");
+            for ( k = 1; k <= 3; k++ )
+                if (k != local_j)
+                    $("#especifica-"+local_i.toString()+"-p"+k.toString()).removeClass("active");
+        }
+    }
 }
