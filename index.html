@@ -7,70 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Calculadora de nota de la Evaluación para el Acceso a la Universidad">
 
-    <!-- Loading script -->
-    <style>
-        @keyframes hideLoader {
-            0% {
-                width: 100%;
-                height: 100%;
-            }
-
-            100% {
-                width: 0;
-                height: 0;
-            }
-        }
-
-        body>div.loader {
-            position: fixed;
-            background: white;
-            width: 100%;
-            height: 100%;
-            z-index: 1071;
-            opacity: 0;
-            transition: opacity .5s ease;
-            overflow: hidden;
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        body:not(.loaded)>div.loader {
-            opacity: 1;
-        }
-
-        body:not(.loaded) {
-            overflow: hidden;
-        }
-
-        body.loaded>div.loader {
-            animation: hideLoader .5s linear .5s forwards;
-        }
-
-        .loading-animation {
-            width: 40px;
-            height: 40px;
-            margin: 100px auto;
-            background-color: #2568ef;
-            border-radius: 100%;
-            animation: pulse 1s infinite ease-in-out
-        }
-
-        @keyframes pulse {
-            0% {
-                -webkit-transform: scale(0);
-                transform: scale(0)
-            }
-
-            100% {
-                -webkit-transform: scale(1);
-                transform: scale(1);
-                opacity: 0
-            }
-        }
-    </style>
-
     <script type="text/javascript">
         window.addEventListener("load", function () { document.querySelector('body').classList.add('loaded'); });
     </script>
@@ -80,7 +16,7 @@
         href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/excite-bike/jquery-ui.css">
     <link href="./static/css/styles.css" rel="stylesheet" type="text/css" media="all" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,600,700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="./static/img/branding/favicon.png" />
+    <link rel="icon" type="image/png" href="./static/img/logos/yas-icon.png" />
 </head>
 
 <body>
@@ -88,24 +24,28 @@
         <div class="loading-animation"></div>
     </div>
 
-    <section class="bg-blue p-0 o-hidden">
+    <section class="bg-orange p-0 o-hidden">
         <div class="container min-vh-100 d-flex flex-column justify-content-between py-4 py-md-5">
             <!-- Header -->
-            <a href="/" class="fade-page text-center">
-                (poner logo)
-                <!--<img src="./static/img/branding/logo.png" alt="Hospitalit-e" width="300px">-->
-            </a>
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-9 col-md-10 text-center">
+                    <a href="/" class="fade-page text-center">
+                        <img src="./static/img/logos/logo-light.png" alt="Calculadora Selectividad" width="60%">
+                    </a>
+                </div>
+            </div>
 
             <!-- Content -->
             <div class="my-5">
 
-                <div class="row justify-content-center" id="loading">
+                <div class="row justify-content-center">
 
                     <div class="col-xl-8 col-lg-9 col-md-10">
-                        <div class="d-flex mb-4 align-items-center justify-content-end text-white">
+                        <div class="d-flex mb-4 align-items-center justify-content-end text-white mr-3 pr-3">
                             <p class="mb-0 mr-3" style="font-size:20px">Nota EvAU:</p>
                             <div class="rounded bg-white">
-                                <div class="h1 mb-0 ml-2 mr-2" style="color:#000; font-size:50px" id="nota-evau">--.---</div>
+                                <div class="h1 mb-0 ml-2 mr-2" style="color:#c4962e; font-size:50px" id="nota-evau">
+                                    --.---</div>
                             </div>
                         </div>
                         <div class="card card-body bg-white justify-content-around">
@@ -119,7 +59,8 @@
                                                         <span class="input-group-text"><strong>Media
                                                                 Bachillerato</strong></span>
                                                     </div>
-                                                    <input class="form-control text-right" placeholder="Nota" type="number" id="media-bach">
+                                                    <input class="form-control text-right" placeholder="Nota"
+                                                        type="number" id="media-bach">
                                                 </div>
                                             </div>
                                         </div>
@@ -133,25 +74,29 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Lengua</span>
                                                     </div>
-                                                    <input class="form-control text-right" placeholder="Nota" type="number" id="troncal-1">
+                                                    <input class="form-control text-right" placeholder="Nota"
+                                                        type="number" id="troncal-1">
                                                 </div>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Lengua extranjera</span>
                                                     </div>
-                                                    <input class="form-control text-right" placeholder="Nota" type="number" id="troncal-2">
+                                                    <input class="form-control text-right" placeholder="Nota"
+                                                        type="number" id="troncal-2">
                                                 </div>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Historia</span>
                                                     </div>
-                                                    <input class="form-control text-right" placeholder="Nota" type="number" id="troncal-3">
+                                                    <input class="form-control text-right" placeholder="Nota"
+                                                        type="number" id="troncal-3">
                                                 </div>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Troncal de opción</span>
                                                     </div>
-                                                    <input class="form-control text-right" placeholder="Nota" type="number" id="troncal-4">
+                                                    <input class="form-control text-right" placeholder="Nota"
+                                                        type="number" id="troncal-4">
                                                 </div>
                                             </div>
                                         </div>
@@ -164,49 +109,89 @@
                                             <p>Rellena la nota en tantas asignaturas como te presentes</p>
                                             <div class="form-group mb-0">
                                                 <div class="input-group">
-                                                    <input class="form-control" placeholder="Nota" type="number" id="especifica-1">
+                                                    <input class="form-control" placeholder="Nota" type="number"
+                                                        id="especifica-1">
                                                     <div class="input-group-append">
                                                         <nav>
                                                             <ul class="pagination">
-                                                                <li class="page-item active" id="especifica-1-p1"><button type="button" class="page-link"><strong>0.1</strong></button></li>
-                                                                <li class="page-item" id="especifica-1-p2"><button type="button" class="page-link"><strong>0.15</strong></button></li>
-                                                                <li class="page-item" id="especifica-1-p3"><button type="button" class="page-link"><strong>0.2</strong></button></li>
+                                                                <li class="page-item active" id="especifica-1-p1">
+                                                                    <button type="button"
+                                                                        class="page-link"><strong>0.1</strong></button>
+                                                                </li>
+                                                                <li class="page-item" id="especifica-1-p2"><button
+                                                                        type="button"
+                                                                        class="page-link"><strong>0.15</strong></button>
+                                                                </li>
+                                                                <li class="page-item" id="especifica-1-p3"><button
+                                                                        type="button"
+                                                                        class="page-link"><strong>0.2</strong></button>
+                                                                </li>
                                                             </ul>
                                                         </nav>
                                                     </div>
                                                 </div>
                                                 <div class="input-group">
-                                                    <input class="form-control" placeholder="Nota" type="number" id="especifica-2">
+                                                    <input class="form-control" placeholder="Nota" type="number"
+                                                        id="especifica-2">
                                                     <div class="input-group-append">
                                                         <nav>
                                                             <ul class="pagination">
-                                                                <li class="page-item active" id="especifica-2-p1"><button type="button" class="page-link"><strong>0.1</strong></button></li>
-                                                                <li class="page-item" id="especifica-2-p2"><button type="button" class="page-link"><strong>0.15</strong></button></li>
-                                                                <li class="page-item" id="especifica-2-p3"><button type="button" class="page-link"><strong>0.2</strong></button></li>
+                                                                <li class="page-item active" id="especifica-2-p1">
+                                                                    <button type="button"
+                                                                        class="page-link"><strong>0.1</strong></button>
+                                                                </li>
+                                                                <li class="page-item" id="especifica-2-p2"><button
+                                                                        type="button"
+                                                                        class="page-link"><strong>0.15</strong></button>
+                                                                </li>
+                                                                <li class="page-item" id="especifica-2-p3"><button
+                                                                        type="button"
+                                                                        class="page-link"><strong>0.2</strong></button>
+                                                                </li>
                                                             </ul>
                                                         </nav>
                                                     </div>
                                                 </div>
                                                 <div class="input-group">
-                                                    <input class="form-control" placeholder="Nota" type="number" id="especifica-3">
+                                                    <input class="form-control" placeholder="Nota" type="number"
+                                                        id="especifica-3">
                                                     <div class="input-group-append">
                                                         <nav>
                                                             <ul class="pagination">
-                                                                <li class="page-item active" id="especifica-3-p1"><button type="button" class="page-link"><strong>0.1</strong></button></li>
-                                                                <li class="page-item" id="especifica-3-p2"><button type="button" class="page-link"><strong>0.15</strong></button></li>
-                                                                <li class="page-item" id="especifica-3-p3"><button type="button" class="page-link"><strong>0.2</strong></button></li>
+                                                                <li class="page-item active" id="especifica-3-p1">
+                                                                    <button type="button"
+                                                                        class="page-link"><strong>0.1</strong></button>
+                                                                </li>
+                                                                <li class="page-item" id="especifica-3-p2"><button
+                                                                        type="button"
+                                                                        class="page-link"><strong>0.15</strong></button>
+                                                                </li>
+                                                                <li class="page-item" id="especifica-3-p3"><button
+                                                                        type="button"
+                                                                        class="page-link"><strong>0.2</strong></button>
+                                                                </li>
                                                             </ul>
                                                         </nav>
                                                     </div>
                                                 </div>
                                                 <div class="input-group">
-                                                    <input class="form-control" placeholder="Nota" type="number" id="especifica-4">
+                                                    <input class="form-control" placeholder="Nota" type="number"
+                                                        id="especifica-4">
                                                     <div class="input-group-append">
                                                         <nav>
                                                             <ul class="pagination">
-                                                                <li class="page-item active" id="especifica-4-p1"><button type="button" class="page-link"><strong>0.1</strong></button></li>
-                                                                <li class="page-item" id="especifica-4-p2"><button type="button" class="page-link"><strong>0.15</strong></button></li>
-                                                                <li class="page-item" id="especifica-4-p3"><button type="button" class="page-link"><strong>0.2</strong></button></li>
+                                                                <li class="page-item active" id="especifica-4-p1">
+                                                                    <button type="button"
+                                                                        class="page-link"><strong>0.1</strong></button>
+                                                                </li>
+                                                                <li class="page-item" id="especifica-4-p2"><button
+                                                                        type="button"
+                                                                        class="page-link"><strong>0.15</strong></button>
+                                                                </li>
+                                                                <li class="page-item" id="especifica-4-p3"><button
+                                                                        type="button"
+                                                                        class="page-link"><strong>0.2</strong></button>
+                                                                </li>
                                                             </ul>
                                                         </nav>
                                                     </div>
@@ -225,13 +210,17 @@
                     </div>
                 </div>
                 <div class="row justify-content-center pt-4">
-                    <a href="https://mianfg.me"><img style="width: 250px;" src="https://mianfg.me/resources/2020/02/withlove.svg"></a>
+                    <a href="https://mianfg.me"><img style="width: 250px;"
+                            src="https://mianfg.me/resources/2020/02/withlove.svg"></a>
                 </div>
             </div>
 
             <!-- Footer -->
             <div class="text-muted text-white text-center">
-                <a href="https://github.com/mianfg/calculadora-sele" target="_blank" role="button" class="selectable btn btn-sm btn-outline-light fade-page" role="button"
+                <a href="https://yoteayudoconlasele.es"><img src="./static/img/logos/yas-icon.png"
+                        width="80px"></a><br><br>
+                <a href="https://github.com/mianfg/calculadora-sele" target="_blank" role="button"
+                    class="selectable btn btn-sm btn-outline-light fade-page" role="button"
                     style="margin-left:10px;margin-right:10px;margin-top:10px;margin-bottom:10px;"><i
                         class="fa fa-github"></i>&nbsp;&nbsp;&nbsp;Ver código en GitHub</a>
             </div>

@@ -5,7 +5,7 @@
 <h1 align="center"><p align="center">Calculadora Selectividad</h1></h1>
 
 > Creado por **Miguel Ángel Fernández Gutiérrez** · https://mianfg.me/  
-> **Prueba esta aplicación en <https://yoteayudoconlasele.es/calculadora>!**
+> **¡Prueba esta aplicación en <https://yoteayudoconlasele.es/calculadora>!**
 
 ## Introducción
 

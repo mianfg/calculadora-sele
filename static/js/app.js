@@ -30,11 +30,9 @@ document.getElementById("calcular").onclick = function () {
     calculate = true;
     
     media_bach = parse(document.getElementById("media-bach").value);
-    console.log(media_bach)
     if (media_bach < 0) {
         $("#media-bach").addClass("is-invalid");
         calculate = false;
-        console.log("f")
     } else
         $("#media-bach").removeClass("is-invalid");
     
@@ -42,28 +40,24 @@ document.getElementById("calcular").onclick = function () {
     if (parse(document.getElementById("troncal-1").value) < 0) {
         $("#troncal-1").addClass("is-invalid");
         calculate = false;
-        console.log("f")
     } else
         $("#troncal-1").removeClass("is-invalid");
     troncales += (parse(document.getElementById("troncal-1").value))/4.0;
     if (parse(document.getElementById("troncal-2").value) < 0) {
         $("#troncal-2").addClass("is-invalid");
         calculate = false;
-        console.log("f")
     } else
         $("#troncal-2").removeClass("is-invalid");
     troncales += (parse(document.getElementById("troncal-2").value))/4.0;
     if (parse(document.getElementById("troncal-3").value) < 0) {
         $("#troncal-3").addClass("is-invalid");
         calculate = false;
-        console.log("f")
     } else
         $("#troncal-3").removeClass("is-invalid");
     troncales += (parse(document.getElementById("troncal-3").value))/4.0;
     if (parse(document.getElementById("troncal-4").value) < 0) {
         $("#troncal-4").addClass("is-invalid");
         calculate = false;
-        console.log("f")
     } else
         $("#troncal-4").removeClass("is-invalid");
     troncales += (parse(document.getElementById("troncal-4").value))/4.0;
@@ -71,25 +65,21 @@ document.getElementById("calcular").onclick = function () {
     if (parse(document.getElementById("especifica-1").value) == -1) {
         $("#especifica-1").addClass("is-invalid");
         calculate = false;
-        console.log("f")
     } else
         $("#especifica-1").removeClass("is-invalid");
     if (parse(document.getElementById("especifica-2").value) == -1) {
         $("#especifica-2").addClass("is-invalid");
         calculate = false;
-        console.log("f")
     } else
         $("#especifica-2").removeClass("is-invalid");
     if (parse(document.getElementById("especifica-3").value) == -1) {
         $("#especifica-3").addClass("is-invalid");
         calculate = false;
-        console.log("f")
     } else
         $("#especifica-3").removeClass("is-invalid");
     if (parse(document.getElementById("especifica-4").value) == -1) {
         $("#especifica-4").addClass("is-invalid");
         calculate = false;
-        console.log("f")
     } else
         $("#especifica-4").removeClass("is-invalid");
 
@@ -103,7 +93,6 @@ document.getElementById("calcular").onclick = function () {
         nota = media_bach*0.4 + troncales*0.6 + getEspecificas(especificas);
         document.getElementById("nota-evau").innerHTML = nota.toFixed(3);
     }
-    console.log(media_bach, troncales, especificas)
 }
 
 document.getElementById("especifica-1-p1").onclick = function () {
