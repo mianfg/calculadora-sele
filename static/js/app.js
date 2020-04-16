@@ -90,7 +90,7 @@ document.getElementById("calcular").onclick = function () {
     especificas.push(parse(document.getElementById("especifica-4").value)*ponder_4);
     
     if (calculate) {
-        nota = media_bach*0.4 + troncales*0.6 + getEspecificas(especificas);
+        nota = media_bach*0.6 + troncales*0.4 + getEspecificas(especificas);
         document.getElementById("nota-evau").innerHTML = nota.toFixed(3);
     }
 }
