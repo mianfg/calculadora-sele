@@ -1,5 +1,19 @@
-var ponder = [0.1, 0.1, 0.1, 0.1]
+/*!
+ * Calculadora Selectividad
+ * https://github.com/mianfg/calculadora-sele
+ *
+ * Author: Miguel Ángel Fernández Gutiérrez (https://mianfg.me)
+ *
+ * Date: 2020-04-16
+ */
 
+/**
+ * Parse from number input
+ * @param {String} input input as string
+ * @return {Float} input as float, with the following error outputs:
+ *      -1 if after parsing input < 0 || input > 10
+ *      -2 if input is empty
+ */
 function parse(input) {
     if (input=="") return -2;
     value = parseFloat(input.replace(",","."));
@@ -9,6 +23,14 @@ function parse(input) {
         return value;
 }
 
+/**
+ * Return parsed input as troncal
+ * @param {String} dom_id id of DOM element
+ * @return {Float} input from DOM element as float
+ * @note Depending on the resulting value, is-invalid feedback will be provided:
+ *      - if input is empty or input < 0 || input > 10:
+ *          - add is-invalid class to DOM of input
+ */
 function parseTroncal(dom_id) {
     val = parse(document.getElementById(dom_id).value);
     if (val < 0)
@@ -19,6 +41,14 @@ function parseTroncal(dom_id) {
     return val;
 }
 
+/**
+ * Return parsed input as especifica
+ * @param {String} dom_id id of DOM element
+ * @return {Float} input from DOM element as float
+ * @note Depending on the resulting value, is-invalid feedback will be provided:
+ *      - if input < 0 || input > 10:
+ *          - add is-invalid class to DOM of input
+ */
 function parseEspecifica(dom_id) {
     val = parse(document.getElementById(dom_id).value);
     if (val == -1)
@@ -29,6 +59,16 @@ function parseEspecifica(dom_id) {
     return val;
 }
 
+/**
+ * Return sum of especificas
+ * @param {Array[Float]} especificas all pondered scores
+ * @return {Float} sum of two biggest values of especificas
+ * @note some cases:
+ *      - if especificas.length == 0
+ *          - returns 0.0
+ *      - if especificas.length == 1
+ *          - returns the only element
+ */
 function getEspecificas(especificas) {
     especificas.push(0.0);
     especificas.push(0.0);
@@ -43,6 +83,11 @@ function getEspecificas(especificas) {
     return sum;
 }
 
+/**
+ * Event listener for "Calcular" button (click event)
+ * 
+ * Calculates and modifies score if all input is OK
+ */
 document.getElementById("calcular").onclick = function () {
     calculate = true;
     
@@ -71,6 +116,10 @@ document.getElementById("calcular").onclick = function () {
     }
 }
 
+// ponder[i] is the ponderation of especifica of index i+1
+var ponder = [0.1, 0.1, 0.1, 0.1]
+
+// generate pondering button listeners for click event
 for ( var i = 1; i <= 4; i++ ) {
     let local_i = i;
     for ( var j = 1; j <= 3; j++ ) {
