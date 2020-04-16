@@ -77,9 +77,7 @@ for ( var i = 1; i <= 4; i++ ) {
         let local_j = j;
         let dom_id = "especifica-"+i.toString()+"-p"+j.toString();
         document.getElementById(dom_id).onclick = function() {
-            console.log("you clicked ",dom_id)
             ponder[local_i-1] = 0.1 + 0.05*(local_j-1);
-            console.log("ponder ",local_i,ponder[local_i-1])
             $("#"+dom_id).addClass("active");
             for ( k = 1; k <= 3; k++ )
                 if (k != local_j)
