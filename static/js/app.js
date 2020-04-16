@@ -36,13 +36,10 @@ function parse(input) {
  *          - add is-invalid class to DOM of input
  */
 function parseTroncal(dom_id) {
-    console.log("parsing troncal ",dom_id)
     val = parse(document.getElementById(dom_id).value);
-    console.log(dom_id, val)
-    if (val < 0) {
-        console.log("entered with "+dom_id)
+    if (val < 0)
         $("#"+dom_id).addClass("is-invalid");
-    } else
+    else
         $("#"+dom_id).removeClass("is-invalid");
 
     return val;
