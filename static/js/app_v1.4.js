@@ -5,6 +5,7 @@
  * Author: Miguel Ángel Fernández Gutiérrez (https://mianfg.me)
  *
  * Date: 2020-04-16
+ * Last modified: 2020-04-18
  */
 
 $(document).ready(function () {
@@ -242,7 +243,7 @@ document.getElementById("calcular").onclick = function () {
 }
 
 // ponder[i] is the ponderation of especifica of index i+1
-var ponder = [0.1, 0.1, 0.1, 0.1]
+var ponder = [0, 0, 0, 0]
 
 // generate pondering button listeners for click event
 for (var i = 1; i <= 4; i++) {
@@ -251,8 +252,14 @@ for (var i = 1; i <= 4; i++) {
         let local_j = j;
         let dom_id = "especifica-" + i.toString() + "-p" + j.toString();
         document.getElementById(dom_id).onclick = function () {
-            ponder[local_i - 1] = 0.1 + 0.05 * (local_j - 1);
-            $("#" + dom_id).addClass("active");
+            let new_ponder = 0.1 + 0.05 * (local_j - 1);
+            if (new_ponder == ponder[local_i-1]) {
+                ponder[local_i-1] = 0;
+                $("#" + dom_id).removeClass("active");
+            } else {
+                ponder[local_i - 1] = 0.1 + 0.05 * (local_j - 1);
+                $("#" + dom_id).addClass("active");
+            }
             for (k = 1; k <= 3; k++)
                 if (k != local_j)
                     $("#especifica-" + local_i.toString() + "-p" + k.toString()).removeClass("active");
