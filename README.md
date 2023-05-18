@@ -4,12 +4,12 @@
 
 <h1 align="center"><p align="center">Calculadora Selectividad</h1></h1>
 
-> Creado por **Miguel Ángel Fernández Gutiérrez** · https://mianfg.me/  
-> **¡Prueba esta aplicación en <https://yoteayudoconlasele.es/calculadora>!**
+> Creado por **Miguel Ángel Fernández Gutiérrez** · [mianfg.me](https://mianfg.me)  
+> **¡Prueba esta aplicación en [calculadora-sele.mianfg.me](https://calculadora-sele.mianfg.me)!**
 
 ## Introducción
 
-**Calculadora Selectividad** es una aplicación web básica creada para la inciativa [@yoteayudoconlasele](https://yoteayudoconlasele.es), en la que los candidatos a Selectividad podrán realizar los cálculos de la nota de la Evaluación para el Acceso a la Universidad de una forma inteligente y rápida.
+**Calculadora Selectividad** es una aplicación web básica creada para la inciativa [@yoteayudoconlasele](https://mianfg.me/projects/yoteayudoconlasele), en la que los candidatos a Selectividad podrán realizar los cálculos de la nota de la Evaluación para el Acceso a la Universidad de una forma inteligente y rápida.
 
 ## Características
 
